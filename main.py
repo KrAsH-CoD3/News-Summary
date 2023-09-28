@@ -15,34 +15,38 @@ from bs4 import BeautifulSoup
 
 # List of news websites
 websites = [
+    # {
+    #     'name': 'Punch',
+    #     'url': 'https://punchng.com/',
+    #     'hp_tag': 'p',
+    #     'hp_article_class': 'post-content',
+    #     'pp_tag': 'p',
+    #     'pp_outter_element': 'div',
+    #     'pp_article_class': 'post-content',
+    # },
+    # {
+    #     'name': 'Premium Times',
+    #     'url': 'https://premiumtimesng.com/',
+    #     'hp_tag': 'h2',
+    #     'hp_article_class': 'jeg_post_title',
+    #     'pp_tag': 'p',
+    #     'pp_outter_element': 'div',
+    #     'pp_article_class': 'content-inner',
+    # },
     {
-        'name': 'Punch',
-        'url': 'https://punchng.com/',
-        'hp_tag': 'p',
-        'hp_article_class': 'post-content',
+        'name': 'The Guardian Nigeria',
+        'url': 'https://guardian.ng/',
+        'hp_tag': 'div',
+        'hp_article_class': 'headline',
         'pp_tag': 'p',
         'pp_outter_element': 'div',
-        'pp_article_class': 'post-content',
-    },
-    {
-        'name': 'Premium Times',
-        'url': 'https://premiumtimesng.com/',
-        'hp_tag': 'h2',
-        'hp_article_class': 'jeg_post_title',
-        'pp_tag': 'p',
-        'pp_outter_element': 'div',
-        'pp_article_class': 'content-inner',
+        'pp_article_class': 'content',
     },
     # {
     #     'name': 'Vanguard',
     #     'url': 'https://vanguardngr.com/',
     #     'tag': 'p'
     #     'article_class': 'entry-title'
-    # },
-    # {
-    #     'name': 'The Guardian Nigeria',
-    #     'url': 'https://guardian.ng/',
-    #     'article_class': 'item'
     # },
     # {
     #     'name': 'Daily Trust',
