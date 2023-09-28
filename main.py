@@ -18,17 +18,26 @@ websites = [
     {
         'name': 'Punch',
         'url': 'https://punchng.com/',
-        'article_class': 'post-content'
+        'hp_tag': 'p',
+        'hp_article_class': 'post-content',
+        'pp_tag': 'p',
+        'pp_outter_element': 'div',
+        'pp_article_class': 'post-content',
+    },
+    {
+        'name': 'Premium Times',
+        'url': 'https://premiumtimesng.com/',
+        'hp_tag': 'h2',
+        'hp_article_class': 'jeg_post_title',
+        'pp_tag': 'p',
+        'pp_outter_element': 'div',
+        'pp_article_class': 'content-inner',
     },
     # {
     #     'name': 'Vanguard',
-    #     'url': 'https://www.vanguardngr.com/',
-    #     'article_class': 'entry-item'
-    # },
-    # {
-    #     'name': 'Premium Times',
-    #     'url': 'https://www.premiumtimesng.com/',
-    #     'article_class': 'post-item'
+    #     'url': 'https://vanguardngr.com/',
+    #     'tag': 'p'
+    #     'article_class': 'entry-title'
     # },
     # {
     #     'name': 'The Guardian Nigeria',
@@ -57,7 +66,7 @@ def get_full_article(article_url):
 def scrape(website) -> dict:
     print(f"Getting {website['name']} News...\n")
     baseurl = website['url']
-    article_class = website['article_class']
+    article_class = website['hp_article_class']
     response = requests.get(baseurl)
     soup = BeautifulSoup(response.content, 'html.parser')
     articles = soup.find_all(class_=article_class)
@@ -68,21 +77,21 @@ def scrape(website) -> dict:
         posturl = article.find('a')['href']
         newspage_response = requests.get(posturl)
         news_soup = BeautifulSoup(newspage_response.content, 'html.parser')
-        news_paragraphs = news_soup.find('div', class_="post-content").find_all('p')
+        news_paragraphs = news_soup.find(website['pp_outter_element'], \
+            class_=website['pp_article_class']).find_all(website['pp_tag'])
         news = news_paragraphs[0].text
         if len(news) > 250: # 250 Characters
             news_info[title] = news.strip()
         else:
             newslist = []
             for news_paragraph in news_paragraphs:
-                # next_element = news_paragraph.next_element
                 if news_paragraph.text not in newslist:
                     newslist.append(news_paragraph.text)
             news = " ".join(newslist).strip()
             news_info[title] = news
             newslist.clear()
             # print("#"*50)
-        if idx == 35: break
+        if idx == 13: break
 
     return news_info  # Scraped Articles
 
